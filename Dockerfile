@@ -32,7 +32,7 @@ RUN apt-get update && apt-get install -y \
       zsh 
 
 #Install ohmyzsh
-RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+RUN curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
 
 RUN chsh -s /usr/bin/zsh
 
