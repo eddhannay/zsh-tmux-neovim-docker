@@ -31,12 +31,6 @@ RUN apt-get update && apt-get install -y \
       wget \
       zsh 
 
-#Install ohmyzsh
-RUN curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
-
-RUN chsh -s /usr/bin/zsh
-
-
 # Install docker
 RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D &&\
       echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" > /etc/apt/sources.list.d/docker.list &&\
@@ -57,10 +51,6 @@ RUN make
 RUN make install
 RUN rm -rf /usr/local/src/tmux*
 
-#Install gpakosz/.tmux
-RUN cd
-RUN git clone https://github.com/gpakosz/.tmux.git
-RUN ln -s -f .tmux/.tmux.conf
 RUN cp .tmux/.tmux.conf.local .
 
 # Install neovim
@@ -85,3 +75,12 @@ RUN apt-get install -y python-software-properties
 RUN add-apt-repository ppa:neovim-ppa/stable
 RUN apt-get update
 RUN apt-get install -y neovim
+
+#Install gpakosz/.tmux
+WORKDIR /root
+RUN git clone https://github.com/gpakosz/.tmux.git
+RUN ln -s -f .tmux/.tmux.conf
+
+#Install ohmyzsh
+RUN curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+RUN chsh -s /usr/bin/zsh
