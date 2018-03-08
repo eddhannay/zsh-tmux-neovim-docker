@@ -1,6 +1,6 @@
 .PHONY: build
 
 build:
-	docker build -t jannis/zsh-tmux-neovim .
+	docker build -t kakalote/zsh-tmux-neovim .
 
 
