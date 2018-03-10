@@ -49,9 +49,9 @@ WORKDIR /usr/local/src/tmux-2.5
 RUN ./configure
 RUN make 
 RUN make install
+WORKDIR /root
 RUN rm -rf /usr/local/src/tmux*
 
-RUN cp .tmux/.tmux.conf.local .
 
 # Install neovim
 RUN apt-get install -y \
@@ -80,7 +80,7 @@ RUN apt-get install -y neovim
 WORKDIR /root
 RUN git clone https://github.com/gpakosz/.tmux.git
 RUN ln -s -f .tmux/.tmux.conf
+RUN cp .tmux/.tmux.conf.local .
 
 #Install ohmyzsh
-RUN curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
-RUN chsh -s /usr/bin/zsh
+RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
