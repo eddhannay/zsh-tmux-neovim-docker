@@ -67,9 +67,13 @@ RUN apt-get install -y \
       python3-dev \
       python3 \
       python3-pip \
+      python3-venv \
       unzip
+# for python2
+RUN pip installl virtualenv
 RUN pip3 install --upgrade pip &&\ 
     pip3 install --user neovim jedi mistune psutil setproctitle
+    pip3 install --user --upgrade PyYAML
 RUN apt-get install -y software-properties-common
 RUN apt-get install -y python-software-properties
 RUN add-apt-repository ppa:neovim-ppa/stable
