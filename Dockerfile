@@ -71,6 +71,7 @@ RUN apt-get install -y \
       unzip
 # for python2
 RUN pip installl virtualenv
+RUN pip install --user pycodestyle pyflakes flake8 vim-vint proselint yamllint
 RUN pip3 install --upgrade pip &&\ 
     pip3 install --user neovim jedi mistune psutil setproctitle
     pip3 install --user --upgrade PyYAML
@@ -79,6 +80,15 @@ RUN apt-get install -y python-software-properties
 RUN add-apt-repository ppa:neovim-ppa/stable
 RUN apt-get update
 RUN apt-get install -y neovim
+
+#Install rafi vim-config
+WORKDIR /root
+RUN mkdir .config
+RUN git clone git://github.com/rafi/vim-config.git ~/.config/nvim
+RUN ln -s ~/.config/nvim ~/.vim
+WORKDIR /root/.config/nvim
+RUN ./venv.sh
+RUN make
 
 #Install gpakosz/.tmux
 WORKDIR /root
