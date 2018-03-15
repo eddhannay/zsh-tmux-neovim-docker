@@ -70,11 +70,9 @@ RUN apt-get install -y \
       python3-venv \
       unzip
 # for python2
-RUN pip installl virtualenv
-RUN pip install --user pycodestyle pyflakes flake8 vim-vint proselint yamllint
-RUN pip3 install --upgrade pip &&\ 
-    pip3 install --user neovim jedi mistune psutil setproctitle
-    pip3 install --user --upgrade PyYAML
+RUN pip install --user virtualenv pycodestyle pyflakes flake8 vim-vint proselint yamllint
+RUN pip3 install --upgrade pip 
+RUN pip3 install --user neovim jedi mistune psutil setproctitle PyYAML
 RUN apt-get install -y software-properties-common
 RUN apt-get install -y python-software-properties
 RUN add-apt-repository ppa:neovim-ppa/stable
@@ -88,7 +86,7 @@ RUN git clone git://github.com/rafi/vim-config.git ~/.config/nvim
 RUN ln -s ~/.config/nvim ~/.vim
 WORKDIR /root/.config/nvim
 RUN ./venv.sh
-RUN make
+RUN make || true
 
 #Install gpakosz/.tmux
 WORKDIR /root
